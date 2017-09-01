@@ -63,6 +63,7 @@ const { createStore} = Redux;
 const store = createStore(todoApp);
 
 const {Component} = React;
+veryStrangeFunction();
 
 
 let nextTodoId = 0 ;
