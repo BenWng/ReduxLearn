@@ -39,12 +39,12 @@ const todos = (state=[], action) => {
 
 
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
-        switch (action.type) {
-            case 'SET_VISIBILITY_FILTER':
-                return action.filter;
-            default:
-                return state;
-        }
+    switch (action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter;
+        default:
+            return state;
+    }
 };
 
 const { combineReducers } = Redux;
@@ -54,6 +54,7 @@ const todoApp = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter
 })
+
 
 
 
@@ -68,24 +69,39 @@ let nextTodoId = 0 ;
 class TodoApp extends Component {
     render(){
         return(
-           <div>
-               <button onClick={ ()=>{
-                   store.dispatch({
-                       type: 'ADD_TODO',
-                       text: 'Test',
-                       id: nextTodoId++
-                   })
-               }}>
-                   Add Todo
-               </button>
-               <ul>
-                   {this.props.todos.map(todo =>
-                       <li key={todo.id}>
-                           {todo.text}
-                       </li>
-                   )}
-               </ul>
-           </div>
+            <div>
+                <input ref={node => {
+                    this.input = node;
+                }}/>
+                <button onClick={ ()=>{
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        text: this.input.value,
+                        id: nextTodoId++
+                    })
+                    this.input.value='';
+                }}>
+                    Add Todo
+                </button>
+                <ul>
+                    {this.props.todos.map(todo =>
+                        <li key={todo.id}
+                            onClick={()=>{
+                                store.dispatch({
+                                    type: 'TOGGLE_TODO',
+                                    id: todo.id
+                                });
+                            }}
+                            style={{
+                                textDecoration:todo.completed?
+                                    'line-through':
+                                    'none'
+                            }}>
+                            {todo.text}
+                        </li>
+                    )}
+                </ul>
+            </div>
         );
     }
 }
