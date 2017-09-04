@@ -16,28 +16,6 @@ const store = createStore(todoApp);
 const {Component} = React;
 
 
-const FilterLink = ({filter,
-                    currentFilter,
-                    children}) => {
-    if (filter=== currentFilter){
-        return <span>{children}</span>
-    }
-
-    return (
-        <a href = '#'
-        onClick = {e => {
-            e.preventDefault();
-            store.dispatch({
-                type: 'SET_VISIBILITY_FILTER',
-                filter
-            })
-        }}>
-            {children}
-        </a>
-    );
-};
-
-
 const getVisibleTodos = (
     todos,
     filter) => {
@@ -54,6 +32,10 @@ const getVisibleTodos = (
             );
     }
 }
+
+
+
+
 
 let nextTodoId = 0 ;
 class TodoApp extends Component {
@@ -79,24 +61,15 @@ class TodoApp extends Component {
                 }}>
                     Add Todo
                 </button>
-                <ul>
-                    {visibleTodos.map(todo =>
-                        <li key={todo.id}
-                            onClick={()=>{
-                                store.dispatch({
-                                    type: 'TOGGLE_TODO',
-                                    id: todo.id
-                                });
-                            }}
-                            style={{
-                                textDecoration:todo.completed?
-                                    'line-through':
-                                    'none'
-                            }}>
-                            {todo.text}
-                        </li>
-                    )}
-                </ul>
+                <TodoList
+                    todos={visibleTodos}
+                    onTodoClick={id =>
+                        store.dispatch({
+                            type: 'TOGGLE_TODO',
+                            id:id
+                        })
+                    }
+                />
                 <p>
                     Show:
                     {' '}
