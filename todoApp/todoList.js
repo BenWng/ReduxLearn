@@ -33,63 +33,57 @@ const getVisibleTodos = (
 
 
 
+
 let nextTodoId = 0 ;
-class TodoApp extends Component {
-    render(){
-        const visibleTodos = getVisibleTodos(
-            this.props.todos,
-            this.props.visibilityFilter
-        );
+const TodoApp = ({todos, visibilityFilter})=>
+    (<div>
+        <AddTodo
+            onAddClick= {
+                text=>store.dispatch({
+                    type: 'ADD_TODO',
+                    text: text,
+                    id: nextTodoId++
+            })}
+        />
+        <TodoList
+            todos={getVisibleTodos(
+                todos,
+                visibilityFilter
+            )}
+            onTodoClick={id =>
+                store.dispatch({
+                    type: 'TOGGLE_TODO',
+                    id:id
+                })
+            }
+        />
+        <p>
+            Show:
+            {' '}
+            <FilterLink
+                filter='SHOW_ALL'
+                currentFilter={visibilityFilter}
+            >
+                All
+            </FilterLink>
+            {' '}
+            <FilterLink
+                filter='SHOW_ACTIVE'
+                currentFilter={visibilityFilter}
+            >
+                Active
+            </FilterLink>
+            {' '}
+            <FilterLink
+                filter='SHOW_COMPLETED'
+                currentFilter={visibilityFilter}
+            >
+                Completed
 
+            </FilterLink>
+        </p>
+    </div>);
 
-        return(
-            <div>
-                <AddTodo
-                    onAddClick= {
-                        text=>store.dispatch({
-                            type: 'ADD_TODO',
-                            text: text,
-                            id: nextTodoId++
-                    })}
-                />
-                <TodoList
-                    todos={visibleTodos}
-                    onTodoClick={id =>
-                        store.dispatch({
-                            type: 'TOGGLE_TODO',
-                            id:id
-                        })
-                    }
-                />
-                <p>
-                    Show:
-                    {' '}
-                    <FilterLink
-                        filter='SHOW_ALL'
-                        currentFilter={this.props.visibilityFilter}
-                    >
-                        All
-                    </FilterLink>
-                    {' '}
-                    <FilterLink
-                        filter='SHOW_ACTIVE'
-                        currentFilter={this.props.visibilityFilter}
-                    >
-                        Active
-                    </FilterLink>
-                    {' '}
-                    <FilterLink
-                        filter='SHOW_COMPLETED'
-                        currentFilter={this.props.visibilityFilter}
-                    >
-                        Completed
-
-                    </FilterLink>
-                </p>
-            </div>
-        );
-    }
-}
 
 
 const render = () => {
