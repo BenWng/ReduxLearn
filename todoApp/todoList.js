@@ -1,17 +1,11 @@
-const { combineReducers } = Redux;
-
-
 const todoApp = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter
 })
 
 
-
-const { createStore} = Redux;
 const store = createStore(todoApp);
 
-const {Component} = React;
 
 
 const getVisibleTodos = (
