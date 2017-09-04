@@ -1,16 +1,25 @@
+
+
+
 class FilterLink extends Component{
+    componentDidMount(){
+        this.unsubsribe=store.subscribe(()=>{
+            this.forceUpdate();
+        });
+    }
+
+    componentWillUnmount(){
+        this.unsubsribe();
+    }
+
 
 
     render(){
 
-        const {filter,
-            currentFilter,
-            onClick,
-            children,
-        }=this.props;
+        const {visibilityFilter} = store.getState();
+        const {filter, children}=this.props;
 
-
-        if (filter === currentFilter) {
+        if (filter === visibilityFilter) {
             return <span>{children}</span>
         }
 
@@ -18,7 +27,10 @@ class FilterLink extends Component{
             <a href='#'
                onClick={e => {
                    e.preventDefault();
-                   onClick(filter);
+                   store.dispatch({
+                       type: 'SET_VISIBILITY_FILTER',
+                       filter : filter
+                   })
                }}>
                 {children}
             </a>

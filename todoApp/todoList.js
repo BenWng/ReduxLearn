@@ -1,13 +1,3 @@
-const todoApp = combineReducers({
-    todos: todos,
-    visibilityFilter: visibilityFilter
-})
-
-
-const store = createStore(todoApp);
-
-
-
 const getVisibleTodos = (
     todos,
     filter) => {
@@ -51,17 +41,7 @@ const TodoApp = ({todos, visibilityFilter})=>
                 })
             }
         />
-        <Footer
-            visibilityFilter = {visibilityFilter}
-            onFilterClick ={
-                filter => {
-                    store.dispatch({
-                        type: 'SET_VISIBILITY_FILTER',
-                        filter : filter
-                    })
-                }
-            }
-        />
+        <Footer />
     </div>);
 
 
