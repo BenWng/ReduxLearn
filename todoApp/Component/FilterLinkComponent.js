@@ -5,7 +5,10 @@ const Link=({active, children, onClick})=>{
 
     return (
         <a href='#'
-           onClick={onClick}>
+           onClick={(e)=>{
+               e.preventDefault()
+               onClick()
+           }}>
             {children}
         </a>
     );
@@ -34,8 +37,7 @@ class FilterLink extends Component{
         return (<Link
                     active = {filter=== visibilityFilter }
                     children={children}
-                    onClick={e => {
-                            e.preventDefault();
+                    onClick={() => {
                             store.dispatch({
                             type: 'SET_VISIBILITY_FILTER',
                             filter : filter
