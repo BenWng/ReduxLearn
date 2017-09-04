@@ -1,20 +1,28 @@
-const FilterLink = ({filter,
-                        currentFilter,
-                        onClick,
-                        children,
-                        }) => {
-    if (filter=== currentFilter){
-        return <span>{children}</span>
-    }
+class FilterLink extends Component{
 
-    return (
-        <a href = '#'
-           onClick = {e => {
-               e.preventDefault();
-               onClick(filter);
-           }}>
-            {children}
-        </a>
-    );
+
+    render(){
+
+        const {filter,
+            currentFilter,
+            onClick,
+            children,
+        }=this.props;
+
+
+        if (filter === currentFilter) {
+            return <span>{children}</span>
+        }
+
+        return (
+            <a href='#'
+               onClick={e => {
+                   e.preventDefault();
+                   onClick(filter);
+               }}>
+                {children}
+            </a>
+        );
+    }
 };
 
