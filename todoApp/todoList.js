@@ -29,18 +29,7 @@ const TodoApp = ({todos, visibilityFilter})=>
                     id: nextTodoId++
             })}
         />
-        <TodoList
-            todos={getVisibleTodos(
-                todos,
-                visibilityFilter
-            )}
-            onTodoClick={id =>
-                store.dispatch({
-                    type: 'TOGGLE_TODO',
-                    id:id
-                })
-            }
-        />
+        <TodoListContainer/>
         <Footer />
     </div>);
 
