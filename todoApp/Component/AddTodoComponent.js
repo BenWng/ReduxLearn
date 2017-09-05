@@ -1,4 +1,7 @@
-const AddTodo = ({onAddClick}) =>{
+let nextTodoId = 0 ;
+
+
+const AddTodo = () =>{
     let input;
     return(
         <div>
@@ -6,7 +9,11 @@ const AddTodo = ({onAddClick}) =>{
                 input = node;
             }}/>
             <button onClick={ ()=>{
-                onAddClick(input.value);
+                store.dispatch({
+                    type: 'ADD_TODO',
+                    text: input.value,
+                    id: nextTodoId++
+                });
                 input.value='';
             }}>
                 Add Todo
