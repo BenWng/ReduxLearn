@@ -19,7 +19,7 @@ const getVisibleTodos = (
 
 
 let nextTodoId = 0 ;
-const TodoApp = ({todos, visibilityFilter})=>
+const TodoApp = ()=>
     (<div>
         <AddTodo
             onAddClick= {
@@ -37,12 +37,9 @@ const TodoApp = ({todos, visibilityFilter})=>
 
 const render = () => {
     ReactDOM.render(
-        <TodoApp
-            {...store.getState()}
-        />,
+        <TodoApp/>,
         document.getElementById('root')
     );
 };
 
-store.subscribe(render);
 render();
