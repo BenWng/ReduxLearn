@@ -16,40 +16,62 @@ const getVisibleTodos = (
 }
 
 
-
-class VisibleTodoList extends Component{
-
-
-    componentDidMount(){
-        const {store} = this.context;
-        this.unsubsribe=store.subscribe(()=>{
-            this.forceUpdate();
-        });
-    }
-
-    componentWillUnmount(){
-        this.unsubsribe();
-    }
-
-    render()
-    {
-        const {store} = this.context;
-        const {todos, visibilityFilter} = store.getState();
-        return (<TodoList
-            todos={getVisibleTodos(
-                todos,
-                visibilityFilter
-            )}
-            onTodoClick={id =>
-                store.dispatch({
-                    type: 'TOGGLE_TODO',
-                    id: id
-                })
-            }
-        />)
+const mapStateToProps = state => {
+    return {
+        todos: getVisibleTodos( state.todos, state.visibilityFilter)
     }
 }
 
-VisibleTodoList.contextTypes = {
-    store: React.PropTypes.object
-}
+const mapDispatchToProps = dispatch => {
+    return {
+        onTodoClick: id => {
+            dispatch({
+                type: 'TOGGLE_TODO',
+                id: id
+            })
+        }
+    };
+};
+
+const VisibleTodoList = connect (
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList)
+
+
+// class VisibleTodoList extends Component{
+//
+//
+//     componentDidMount(){
+//         const {store} = this.context;
+//         this.unsubsribe=store.subscribe(()=>{
+//             this.forceUpdate();
+//         });
+//     }
+//
+//     componentWillUnmount(){
+//         this.unsubsribe();
+//     }
+//
+//     render()
+//     {
+//         const {store} = this.context;
+//         const {todos, visibilityFilter} = store.getState();
+//         return (<TodoList
+//             todos={getVisibleTodos(
+//                 todos,
+//                 visibilityFilter
+//             )}
+//             onTodoClick={id =>
+//                 store.dispatch({
+//                     type: 'TOGGLE_TODO',
+//                     id: id
+//                 })
+//             }
+//         />)
+//     }
+// }
+//
+// VisibleTodoList.contextTypes = {
+//     store: React.PropTypes.object
+// }
