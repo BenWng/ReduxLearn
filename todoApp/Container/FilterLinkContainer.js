@@ -1,5 +1,6 @@
 class FilterLink extends Component{
     componentDidMount(){
+        const {store} = this.context;
         this.unsubsribe=store.subscribe(()=>{
             this.forceUpdate();
         });
@@ -13,6 +14,7 @@ class FilterLink extends Component{
 
     render(){
 
+        const {store} = this.context;
         const {visibilityFilter} = store.getState();
         const {filter, children}=this.props;
 
@@ -29,3 +31,7 @@ class FilterLink extends Component{
 
     }
 };
+
+FilterLink.contextTypes = {
+    store: React.PropTypes.object
+}

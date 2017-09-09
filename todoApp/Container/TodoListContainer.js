@@ -21,6 +21,7 @@ class VisibleTodoList extends Component{
 
 
     componentDidMount(){
+        const {store} = this.context;
         this.unsubsribe=store.subscribe(()=>{
             this.forceUpdate();
         });
@@ -32,6 +33,7 @@ class VisibleTodoList extends Component{
 
     render()
     {
+        const {store} = this.context;
         const {todos, visibilityFilter} = store.getState();
         return (<TodoList
             todos={getVisibleTodos(
@@ -46,4 +48,8 @@ class VisibleTodoList extends Component{
             }
         />)
     }
+}
+
+VisibleTodoList.contextTypes = {
+    store: React.PropTypes.object
 }

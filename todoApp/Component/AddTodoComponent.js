@@ -1,7 +1,7 @@
 let nextTodoId = 0 ;
 
 
-const AddTodo = () =>{
+const AddTodo = (props, {store}) =>{
     let input;
     return(
         <div>
@@ -20,4 +20,8 @@ const AddTodo = () =>{
             </button>
         </div>
     );
+}
+
+AddTodo.contextTypes = {
+    store: React.PropTypes.object
 }
