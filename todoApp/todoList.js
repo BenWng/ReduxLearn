@@ -7,28 +7,33 @@ const TodoApp = ()=>
 
 
 
-class Provider extends Component {
-    getChildContext() {
-        return {
-          store: this.props.store
-        };
-    }
+// class Provider extends Component {
+//     getChildContext() {
+//         return {
+//           store: this.props.store
+//         };
+//     }
+//
+//     render() {
+//         return this.props.children;
+//     }
+//
+// }
 
-    render() {
-        return this.props.children;
-    }
 
-}
+
+
+
+// Provider.childContextTypes = {
+//   store: React.PropTypes.object
+// };
+
+
 
 const todoApp = combineReducers({
     todos: todos,
     visibilityFilter: visibilityFilter
 })
-
-
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-};
 
 
 const render = () => {
