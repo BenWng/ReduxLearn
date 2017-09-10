@@ -37,17 +37,18 @@
 // }
 
 
-const mapStateToProps = (state, ownProps) => {
+let mapFilterLinkStateToProps = (state, ownProps) => {
     return {
-        active: ()=>{ return ownProps.filter === state.visibilityFilter; }
+        active: ownProps.filter === state.visibilityFilter
     }
 }
 
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+let mapFilterLinkDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
-            dispatch( {type: 'SET_VISIBILITY_FILTER',
+            dispatch( {
+                type: 'SET_VISIBILITY_FILTER',
                 filter : ownProps.filter
             });
         }
@@ -55,4 +56,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 
-const FilterLink = connect (mapStateToProps, mapDispatchToProps);
+const FilterLink = connect(mapFilterLinkStateToProps, mapFilterLinkDispatchToProps)(Link);
