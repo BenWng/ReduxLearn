@@ -37,14 +37,14 @@
 // }
 
 
-let mapFilterLinkStateToProps = (state, ownProps) => {
+let mapStateToProps = (state, ownProps) => {
     return {
         active: ownProps.filter === state.visibilityFilter
     }
 }
 
 
-let mapFilterLinkDispatchToProps = (dispatch, ownProps) => {
+let mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch( {
@@ -56,4 +56,4 @@ let mapFilterLinkDispatchToProps = (dispatch, ownProps) => {
 }
 
 
-const FilterLink = connect(mapFilterLinkStateToProps, mapFilterLinkDispatchToProps)(Link);
+const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link);

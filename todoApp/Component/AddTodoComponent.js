@@ -1,4 +1,3 @@
-let nextTodoId = 0 ;
 
 
 let AddTodo = ({dispatch}) =>{
@@ -9,11 +8,7 @@ let AddTodo = ({dispatch}) =>{
                 input = node;
             }}/>
             <button onClick={ ()=>{
-                dispatch({
-                    type: 'ADD_TODO',
-                    text: input.value,
-                    id: nextTodoId++
-                });
+                dispatch(AddTodoAction(input.value));
                 input.value='';
             }}>
                 Add Todo
