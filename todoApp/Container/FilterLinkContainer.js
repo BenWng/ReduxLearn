@@ -47,10 +47,7 @@ let mapStateToProps = (state, ownProps) => {
 let mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
-            dispatch( {
-                type: 'SET_VISIBILITY_FILTER',
-                filter : ownProps.filter
-            });
+            dispatch( FilterLinkAction(ownProps.filter));
         }
     }
 }
